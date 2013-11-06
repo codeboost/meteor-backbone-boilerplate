@@ -15,15 +15,8 @@ Meteor.subscribe("cars")
 
 # Method to get the current user's email that won't ever throw an undefined error!
 Meteor.users.getActiveEmail = () ->
-    email = ""
-    if Meteor.userId()?
-        if Meteor.user()?
-            if Meteor.user().emails?
-                if Meteor.user().emails[0]?
-                    if Meteor.user().emails[0].address?
-                        email = Meteor.user().emails[0].address
-
-    return email
+    email = Meteor.user()?.emails?[0]?.address if Meteor.userId()
+    return email ? ""
 
 Meteor.startup () ->
     $ ->
